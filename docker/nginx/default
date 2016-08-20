@@ -1,0 +1,32 @@
+server {
+    listen 80; # backlog=165536 rcvbuf=4310720 sndbuf=40485760;
+    listen 443 default ssl;
+
+    charset utf8;
+
+    root  /var/www/file-view/htdocs;
+    index index.php;
+
+    location / {
+        error_page 403 = /403.html;
+
+        expires 1d;
+        add_header Cache-Control "public";
+        try_files $uri @php-index;
+    }
+
+    location /.static {
+        expires 1d;
+        add_header Cache-Control "public";
+        alias /var/www/file-view/src/static;
+    }
+
+    location @php-index {
+        fastcgi_index  index.php;
+        fastcgi_param  SCRIPT_FILENAME  /var/www/file-view/src/index.php;
+        include        fastcgi_params;
+        fastcgi_pass   unix:/var/run/php5-fpm.sock;
+    }
+
+}
+

@@ -1,0 +1,179 @@
+* {
+    margin:0;
+    padding:0;
+}
+
+html, body {
+    color:#000;
+    font:normal 14px Arial;
+    height: 100%;
+}
+
+a {
+    color:#3366cc;
+    text-decoration: none;
+}
+
+a:visited {
+    color:#663399;
+}
+
+img {
+    border:none;
+}
+
+.disabled {
+    color: #bbb;
+}
+
+#main {
+    position:relative;
+    overflow: hidden;
+    min-height:100%;
+}
+
+#header {
+    padding:20px 12px 10px 35px;
+    border-bottom:solid 1px #aaa;
+}
+
+#filters {
+    margin-top:8px;
+}
+
+.filters_block {
+    margin-right:70px;
+    display: inline;
+}
+
+#path {
+    margin-left:-10px;
+    font:normal 18px Arial;
+}
+
+#side_menu {
+    width: 200px;
+    float: left;
+    border-right: 1px solid #aaa;
+    padding: 10px;
+    padding-bottom: 1001em;
+    margin-bottom: -1000em;
+}
+
+#side_menu a, #side_menu span {
+    display: block;
+    font:normal 16px Arial;
+    padding: 2px 5px;
+    margin: 15px 5px;
+}
+
+
+#side_menu .back a {
+    font:normal 14px Arial !important;
+}
+
+
+#content {
+    margin-left: 220px;
+    padding: 10px;
+}
+
+
+.link {
+    border:none;
+    background-color:transparent;
+    color:#009933 !important;
+    text-decoration:underline;
+    cursor:pointer;
+}
+
+a.normal {
+    font:normal 14px Arial;
+    color:#000 !important;
+}
+
+.float_files  {
+    padding: 10px 25px;
+}
+
+.float_group {
+    float:left;
+    width:100%;
+}
+
+.float_files .dir {
+    font-size: 22px;
+    padding: 5px;
+    margin: 5px 0;
+}
+
+
+.float_files .float_container {
+    float: left;
+    width: 500px;
+    padding: 5px;
+    margin: 15px 0 0 0;
+}
+
+.float_files .subtitile {
+    padding:3px 0;
+}
+
+
+.float_files audio, .float_files video {
+    background-color: #fafafa;
+}
+
+.other_file {
+    margin:10px 0 0 0;
+    padding: 5px;
+}
+
+.table_files {
+    padding: 5px;
+}
+.table_files td {
+    vertical-align: bottom;
+}
+
+.table_files  {
+    margin: 5px;
+}
+
+.table_files td {
+    padding: 10px 20px;
+}
+
+.table_files .dir a {
+    font:normal 22px Arial;
+}
+
+#pusher {
+    padding:20px;
+    width:100%;
+    float: left;
+}
+
+span.arrow {
+    display: inline-block;
+    width:10px;
+}
+
+.odd {
+    background-color: #F7F7F7;
+}
+
+.highlighted, .highlighted * {
+    background: #fff2cc;
+}
+
+.markdown-body-wrapper {
+    float:left;
+    width: 100%;
+    margin: 35px 30px;
+}
+
+.markdown-page {
+    margin: 50px auto;
+    max-width: 800px;
+}

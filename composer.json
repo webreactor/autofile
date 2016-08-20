@@ -1,0 +1,18 @@
+{
+    "name": "webreactor/file-web-view",
+    "description": "Simple file view web app",
+    "authors": [
+        {
+            "name": "Maxim Popov"
+        }
+    ],
+    "require": {
+        "erusev/parsedown": "~1.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Reactor\\": "src/Reactor/",
+            "FileWebView\\": "src/"
+        }
+    }
+}
