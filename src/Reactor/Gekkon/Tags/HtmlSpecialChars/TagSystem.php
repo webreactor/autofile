@@ -24,8 +24,7 @@ class TagSystem extends BaseTagSingle {
 
     function compile($compiler) {
         if (preg_match('/\$\w/u', $this->args_raw)) {
-            $exp = "'" . preg_replace('/([\$@][^\s]+)/u', "' . \\1 . '", $this->args_raw) . "'";
-            $exp = $compiler->exp_compiler->compile_exp($exp);
+            $exp = $compiler->exp_compiler->compile_exp($this->args_raw);
             if ($exp === false) {
                 return $compiler->error_in_tag('Cannot compile args "' . $this->args_raw . '"', $this);
             }

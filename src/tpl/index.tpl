@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>{$config.name} | {{$request.document_relative_path}}</title>
+	<title>{$config.name} | /{{$request.document_relative_path}}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <script type="text/javascript" src="{$config.base_url}.static/js/jquery-3.1.0.min.js"></script>
     <script type="text/javascript" src="{$config.base_url}.static/js/highlight.min.js"></script>
