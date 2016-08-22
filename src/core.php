@@ -12,3 +12,4 @@ $_container['view']->settings['force_compile'] = true;
 $_container['application'] = new Application($_config);
 $_container['application']->setServices($_container);
 $_container['markdown'] = new \Parsedown();
+$_container['web_controller'] = new Controller($_container);
