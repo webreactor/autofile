@@ -46,7 +46,7 @@ class FileFactory {
         }
         $data = posix_getpwuid($id);
         $name = $id;
-        if (!empty($user)) {
+        if (!empty($data)) {
             $name = $data['name'];
         }
         $this->cacher->mset('uid_'.$id, $name);
@@ -60,7 +60,7 @@ class FileFactory {
         }
         $data = posix_getgrgid($id);
         $name = $id;
-        if (!empty($user)) {
+        if (!empty($data)) {
             $name = $data['name'];
         }
         $this->cacher->mset('gid_'.$id, $name);
