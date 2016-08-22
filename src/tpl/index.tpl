@@ -53,17 +53,17 @@
                         <span class="arrow"></span>
                     {/if}
                     {if $request.sort == 'size' }
-                        <a href="{$controller->filters($request,array('sort_direction'=>$oposite_sort))}">размеру</a>
+                        <a href="{$request.document_url}{$controller->filters($request,array('sort_direction'=>$oposite_sort))}">размеру</a>
                         <span class="arrow">{if $request.sort_direction != 'asc' }&uarr;{else}&darr;{/if}</span>
                     {else}
-                        <a href="{$controller->filters($request,array('sort'=>'size'))}">размеру</a>
+                        <a href="{$request.document_url}{$controller->filters($request,array('sort'=>'size'))}">размеру</a>
                         <span class="arrow"></span>
                     {/if}
                     {if $request.sort == 'mtime' }
-                        <a href="{$controller->filters($request,array('sort_direction'=>$oposite_sort))}">дате&nbsp;модификации</a>
+                        <a href="{$request.document_url}{$controller->filters($request,array('sort_direction'=>$oposite_sort))}">дате&nbsp;модификации</a>
                             <span class="arrow">{if $request.sort_direction != 'asc' }&uarr;{else}&darr;{/if}</span>
                     {else}
-                        <a href="{$controller->filters($request,array('sort'=>'mtime'))}">дате&nbsp;модификации</a>
+                        <a href="{$request.document_url}{$controller->filters($request,array('sort'=>'mtime'))}">дате&nbsp;модификации</a>
                         <span class="arrow"></span>
                     {/if}
             </div>

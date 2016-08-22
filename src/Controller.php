@@ -32,9 +32,9 @@ class Controller {
 
     function parseRequest($raw_request) {
         $request = new \ArrayObject();
-        $request['sort'] =              Utilities::inputGetStr($raw_request['get'], 'sort', 'name' );
+        $request['sort'] =              Utilities::inputGetStr($raw_request['get'], 'sort', 'mtime' );
         $request['view_mode'] =         Utilities::inputGetStr($raw_request['get'], 'view', 'float' );
-        $request['sort_direction'] =    Utilities::inputGetStr($raw_request['get'], 'dir', 'asc' );
+        $request['sort_direction'] =    Utilities::inputGetStr($raw_request['get'], 'dir', 'desc' );
 
         $uri = parse_url($raw_request['uri']);
         $uri['path'] = rawurldecode($uri['path']);
