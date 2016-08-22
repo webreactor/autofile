@@ -4,7 +4,7 @@ namespace FileWebView;
 
 class Utilities {
 
-    function formatSize($size) {
+    static function formatSize($size) {
         switch (true) {
         case ($size > 1099511627776):
             $size /= 1099511627776;
@@ -28,19 +28,19 @@ class Utilities {
         return round($size, 2).$suffix;
     }
 
-    function getStrChars($str) {
+    static function getStrChars($str) {
         return htmlspecialchars($str, ENT_QUOTES);
     }
 
-    function urlEncodePath($path) {
+    static function urlEncodePath($path) {
         return str_replace("%2F", "/", rawurlencode($path));
     }
 
-    function sanitizePath($path) {
+    static function sanitizePath($path) {
         return str_replace('/../','', $path);;
     }
 
-    function inputGetStr($_RGET, $name,$def=false,$stop='') {
+    static function inputGetStr($_RGET, $name,$def=false,$stop='') {
         if (isset($_RGET[$name]))$test=trim($_RGET[$name]); else $test='';
 
         if ($test == '') {
@@ -55,7 +55,7 @@ class Utilities {
         return $_RGET[$name];
     }
 
-    function inputGetNum($_RGET, $name,$def='',$stop='') {
+    static function inputGetNum($_RGET, $name,$def='',$stop='') {
         global $_RGET;
         if (isset($_RGET[$name]))$test=trim($_RGET[$name]); else $test='';
 
@@ -71,15 +71,15 @@ class Utilities {
         return $_RGET[$name]=$test;;
     }
 
-    function tsToDate($time_stamp) {
+    static function tsToDate($time_stamp) {
         return date(FORMAT_DATE,$time_stamp);
     }
 
-    function tsToDateTime($time_stamp) {
+    static function tsToDateTime($time_stamp) {
         return date(FORMAT_DATETIME,$time_stamp);
     }
 
-    function getExtention($filename) {
+    static function getExtention($filename) {
         return strtolower(strrchr($filename, '.'));
     }
 
