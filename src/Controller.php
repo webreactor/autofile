@@ -148,10 +148,10 @@ class Controller {
         if ($request['view_mode'] != 'float') {
             $rez[]='view='.$request['view_mode'];
         }
-        if ($request['sort'] != 'name') {
+        if ($request['sort'] != 'mtime') {
             $rez[]='sort='.$request['sort'];
         }
-        if ($request['sort_direction'] != 'asc') {
+        if ($request['sort_direction'] != 'desc') {
             $rez[]='dir='.$request['sort_direction'];
         }
         if (count($rez) == 0) {
