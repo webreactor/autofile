@@ -82,7 +82,7 @@
             </td>
             <td><small>{$size}</small></td>
             <td>{$file.stat.mtime.\FileWebView\Utilities::tsToDateTime()}</td>
-            <td>{$file.stat.username}</td>
+            <td>{{$file.stat.username}}</td>
             <td><a href="#{$file.name.rawurlencode()}" class="pointer">#</a></td>
         </tr>
     {/if}

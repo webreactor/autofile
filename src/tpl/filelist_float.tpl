@@ -15,7 +15,9 @@
                 <div class="float_container" file_id="{$file.name.rawurlencode()}">
                     <a href="{$request.document_url}{$file.name.rawurlencode()}">
                         <img src="{$config.thumbs_url}{$request.document_relative_url}{$file.name.rawurlencode()}.jpg"
-                        title="{$file.meta.width}&#215;{$file.meta.height}{@ "\n"}{$file.stat.ctime.\FileWebView\Utilities::tsToDateTime()}">
+title="{$file.meta.width}&#215;{$file.meta.height}
+{$file.stat.ctime.\FileWebView\Utilities::tsToDateTime()}
+{{$file.stat.username}}">
                     </a>
                     <div class="subtitile">
                         <a href="{$request.document_url}{$file.name.rawurlencode()}">{{$file.name}}</a> <small>{$size}</small>
@@ -36,7 +38,8 @@
                     </video>
                     <div class="subtitile">
                         <a href="{$request.document_url}{$file.name.rawurlencode()}"
-                        title="{$file.stat.ctime.\FileWebView\Utilities::tsToDateTime()}"
+title="{$file.stat.ctime.\FileWebView\Utilities::tsToDateTime()}
+{{$file.stat.username}}"
                         >{{$file.name}}</a> <small>{$size}</small>
                         <a href="#{$file.name.rawurlencode()}" class="pointer">#</a>
                     </div>
@@ -56,7 +59,8 @@
                     {/if}
                     <div class="subtitile">
                         <a href="{$request.document_url}{$file.name.rawurlencode()}"
-                        title="{$file.stat.ctime.\FileWebView\Utilities::tsToDateTime()}"
+title="{$file.stat.ctime.\FileWebView\Utilities::tsToDateTime()}
+{{$file.stat.username}}"
                         >{{$file.name}}</a> <small>{$size}</small>
                         {if $file.type == 'markdown'}
                             <a href="{$config.thumbs_url}{$request.document_relative_url}{$file.name.rawurlencode()}.html">view</a>

@@ -37,6 +37,14 @@
             <span class="arrow"></span>
         {/if}
     </td>
+    <td>
+        {if $request.sort == 'username' }
+            <a class="normal" href="{$controller->filters($request,array('sort_direction'=>$oposite_sort))}">
+                Пользователь</a>&nbsp;{if $request.sort_direction != 'asc' }&uarr;{else}&darr;{/if}
+        {else}
+            <a class="normal" href="{$controller->filters($request,array('sort'=>'username'))}">Пользователь</a>&nbsp;
+        {/if}
+    </td>
 </tr>
 
 {foreach from=$data item=$file}
@@ -90,6 +98,7 @@
         <td>{$file.type}</td>
         <td><small>{$size}</small></td>
         <td>{$file.stat.mtime.\FileWebView\Utilities::tsToDateTime()}</td>
+        <td>{{$file.stat.username}}</td>
         <td><a href="#{$file.name.rawurlencode()}" class="pointer">#</a></td>
     </tr>
     {/if}

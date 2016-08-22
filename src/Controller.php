@@ -135,7 +135,7 @@ class Controller {
     }
 
     function fileSort($files, $by, $direction) {
-        $alloved = array('name', 'type', 'size', 'mtime');
+        $alloved = array('name', 'type', 'size', 'mtime', 'username');
         if (!in_array($by, $alloved)) {
             die();
         }
