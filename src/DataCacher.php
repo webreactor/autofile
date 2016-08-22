@@ -10,7 +10,8 @@ class DataCacher {
     }
 
     function getMetaFilename($key) {
-        return $this->store_path.md5($key);
+        $key = md5($key);
+        return $this->store_path.$key[0].$key[1].'/'.$key;
     }
 
     function get($key) {
@@ -22,7 +23,6 @@ class DataCacher {
     }
 
     function set($key, $data) {
-
         $filename = $this->getMetaFilename($key);
         Utilities::create_dir(dirname($filename));
         file_put_contents($filename, json_encode($data));
