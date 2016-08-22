@@ -33,6 +33,14 @@
             <a class="normal" href="{$controller->filters($request,array('sort'=>'mtime'))}">Дата&nbsp;модификации</a>&nbsp;
         {/if}
     </td>
+    <td>
+        {if $request.sort == 'username' }
+            <a class="normal" href="{$controller->filters($request,array('sort_direction'=>$oposite_sort))}">
+                Пользователь</a>&nbsp;{if $request.sort_direction != 'asc' }&uarr;{else}&darr;{/if}
+        {else}
+            <a class="normal" href="{$controller->filters($request,array('sort'=>'username'))}">Пользователь</a>&nbsp;
+        {/if}
+    </td>
 </tr>
 {foreach from=$data item=$file}
     {if $file.type == 'dir' }
@@ -74,6 +82,7 @@
             </td>
             <td><small>{$size}</small></td>
             <td>{$file.stat.mtime.\FileWebView\Utilities::tsToDateTime()}</td>
+            <td>{$file.stat.username}</td>
             <td><a href="#{$file.name.rawurlencode()}" class="pointer">#</a></td>
         </tr>
     {/if}
