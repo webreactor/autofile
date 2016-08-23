@@ -6,8 +6,8 @@ build:
 
 docker-start: docker-build
 	-@docker rm -f $(CONTAINER_NAME)
-	mkdir -p var/log var/tpl_bin htdocs
-	chmod a+w var/log var/tpl_bin htdocs -R
+	mkdir -p tpl_bin htdocs
+	chmod a+w tpl_bin htdocs -R
 	docker run --name $(CONTAINER_NAME) -d \
 		-v $(shell pwd):/var/www/file-view \
 		-v $(shell pwd)/docker/nginx:/etc/nginx/sites-enabled \
