@@ -44,7 +44,7 @@ class Application {
         do {
             $path = array_pop($path_stack);
             $indir = scandir($this->getFullPath($path));
-            foreach ($c_files as $filename) {
+            foreach ($indir as $filename) {
                 if ($filename[0] != '.') {
                     $relative_name = $path.$filename;
                     $file = $this->getFile($relative_name);
