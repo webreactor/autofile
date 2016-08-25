@@ -16,8 +16,8 @@
                 <div class="float_container" file_id="{{$file.url}}">
                     {include "preview.tpl"}
                     <div class="subtitile">
-                        <a href="{$file.url}">{include "filename.tpl"}</a> <small>{$size}</small>
-                        <a href="#{$file.url}" class="pointer">#</a>
+                        <a href="{$file.url}">{include "filename.tpl"}</a>
+                        <small>{$size}</small>&nbsp;<a href="#{$file.url}" class="pointer">#</a>
                     </div>
                 </div>
             {/if}
@@ -34,8 +34,8 @@
                         <a href="{$file.url}"
 title="{$file.stat.hmtime}
 {{$file.stat.username}}"
-                        >{include "filename.tpl"}</a> <small>{$size}</small>
-                        <a href="#{$file.url}" class="pointer">#</a>
+                        >{include "filename.tpl"}</a>
+                        <small>{$size}</small>&nbsp;<a href="#{$file.url}" class="pointer">#</a>
                     </div>
                 </div>
             {/if}
@@ -51,8 +51,8 @@ title="{$file.stat.hmtime}
                         <a href="{$file.url}"
 title="{$file.stat.hmtime}
 {{$file.stat.username}}"
-                        >{include "filename.tpl"}</a> <small>{$size}</small>
-                        <a href="#{$file.url}" class="pointer">#</a>
+                        >{include "filename.tpl"}</a> 
+                        <small>{$size}</small>&nbsp;<a href="#{$file.url}" class="pointer">#</a>
                     </div>
                 </div>
             {/if}
