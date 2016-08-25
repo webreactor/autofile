@@ -15,7 +15,7 @@ class FileFactory {
         return $this->base_dir.$relative_name;
     }
 
-    function getFile($relative_name) {
+    function getFile($relative_name, $with_meta = true) {
         $file = array(
             'relative_name' => $relative_name,
             'fullname'      => $this->getFullPath($relative_name),
@@ -25,7 +25,7 @@ class FileFactory {
             $file['type'] = 'dir';
         } else {
             $file['type'] = $this->getFileType($relative_name);
-            if ($file['type'] != 'file') {
+            if ($file['type'] != 'file' && $with_meta) {
                 $file['meta'] = $this->getFileMeta($relative_name, $file['stat'], $file['type']);    
             }
         }

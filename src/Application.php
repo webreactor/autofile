@@ -29,26 +29,38 @@ class Application {
         return $p->createPreview($file, $this->config['thumbs_dir'].$file_dst);
     }
 
-    public function fileList($relative_dir) {
+    function normalizeRelativePath($relative_dir) {
         $relative_dir = rtrim($relative_dir, '/').'/';
         if ($relative_dir == '/') {
             $relative_dir = '';
         }
+        return $relative_dir;
+    }
+
+    function fileList($relative_dir, $recursive = false) {
         $files = array();
-        $indir = scandir($this->getFullPath($relative_dir));
-        foreach($indir as $filename) {
-            if ($filename[0] != '.') {
-                $relative_name = $relative_dir.$filename;
-                $file = $this->getFile($relative_name);
-                $file['name'] = $filename;
-                $files[$filename] = $file;
+        $path_stack = array();
+        array_push($path_stack, $relative_dir);
+        do {
+            $path = array_pop($path_stack);
+            $indir = scandir($this->getFullPath($path));
+            foreach ($c_files as $filename) {
+                if ($filename[0] != '.') {
+                    $relative_name = $path.$filename;
+                    $file = $this->getFile($relative_name);
+                    $file['name'] = $filename;
+                    $files[$filename] = $file;
+                    if ($file['type'] == 'dir' && $recursive) {
+                        array_push($relative_name);
+                    }
+                }
             }
-        }
+        } while (count($path_stack) > 0);
         return $files;
     }
 
-    public function getFile($relative_name) {
-        return $this->file_factory->getFile(rtrim($relative_name, '/'));
+    public function getFile($relative_name, $with_meta = true) {
+        return $this->file_factory->getFile(rtrim($relative_name, '/'), $with_meta);
     }
 
     function getFullPath($relative_name) {
@@ -56,10 +68,7 @@ class Application {
     }
 
     function getFolders($relative_dir) {
-        $relative_dir = rtrim($relative_dir, '/').'/';
-        if ($relative_dir == '/') {
-            $relative_dir = '';
-        }
+        $relative_dir = $this->normalizeRelativePath($relative_dir);
         $folders = array();
         $indir = scandir($this->getFullPath($relative_dir));
         foreach($indir as $filename) {

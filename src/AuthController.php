@@ -45,7 +45,7 @@ class AuthController {
     function askCredentials() {
         header('WWW-Authenticate: Basic realm="Autofile"');
         header('HTTP/1.0 401 Unauthorized');
-        die ("Not authorized");
+        die("Not authorized");
     }
 
     function isSecured($url) {

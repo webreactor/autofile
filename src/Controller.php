@@ -35,6 +35,7 @@ class Controller {
         $request['sort'] =              Utilities::inputGetStr($raw_request['get'], 'sort', 'mtime' );
         $request['view_mode'] =         Utilities::inputGetStr($raw_request['get'], 'view', 'float' );
         $request['sort_direction'] =    Utilities::inputGetStr($raw_request['get'], 'dir', 'desc' );
+        $request['rec'] = Utilities::inputGetStr($raw_request['get'], 'rec', 'no' );
 
         $uri = parse_url($raw_request['uri']);
         $uri['path'] = rawurldecode($uri['path']);
@@ -113,7 +114,7 @@ class Controller {
             $request['template'] = 'filelist_mixed.tpl';    
         }
         
-        $full_list = $this->application->fileList($request['document_relative_path']);
+        $full_list = $this->application->fileList($request['document_relative_path'], $request['rec'] === 'yes');
         return $this->fileSort($full_list, $request['sort'], $request['sort_direction']);
     }
 
@@ -162,52 +163,3 @@ class Controller {
 
 
 }
-/*
-
-{set $namesort = array( 'file' => array() , 'dir' => array() ) }
-{set $datesort = array( 'file' => array() , 'dir' => array() ) }
-{set $sizesort = array( 'file' => array() , 'dir' => array() ) }
-
-{foreach from=$fl.file item=$item key=$k }
-    {set $namesort.file.$k = $k }
-    {set $datesort.file.$k = $item.mtime }
-    {set $sizesort.file.$k = $item.size }
-{/foreach}
-{foreach from=$fl.dir item=$item key=$k }
-    {set $namesort.dir.$k = $k }
-    {set $datesort.dir.$k = $item.mtime }
-    {set $sizesort.dir.$k = $item.size }
-{/foreach}
-
-{if $sort == 'name' }
-    {set $namesort.file.natcasesort() }
-    {set $namesort.dir.natcasesort() }
-    {if $direction == 'desc' }
-        {set $namesort.file = $namesort.file.array_reverse() }
-        {set $namesort.dir = $namesort.dir.array_reverse() }
-    {/if}
-    {set $foring = $namesort }
-{else}
-    {if $sort == 'dtime' }
-        {set $datesort.file.natsort() }
-        {set $datesort.dir.natsort() }
-        {if $direction == 'desc' }
-            {set $datesort.file = $datesort.file.array_reverse() }
-            {set $datesort.dir = $datesort.dir.array_reverse() }
-        {/if}
-        {set $foring = $datesort }
-    {else}
-        {if $sort == 'size' }
-            {set $sizesort.file.natsort() }
-            {set $sizesort.dir.natsort() }
-            {if $direction == 'desc' }
-                {set $sizesort.file = $sizesort.file.array_reverse() }
-                {set $sizesort.dir = $sizesort.dir.array_reverse() }
-            {/if}
-            {set $foring = $sizesort }
-        {/if}
-    {/if}
-{/if}
-
-
-*/
