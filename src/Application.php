@@ -51,7 +51,7 @@ class Application {
                     $file['name'] = $filename;
                     $files[$filename] = $file;
                     if ($file['type'] == 'dir' && $recursive) {
-                        array_push($relative_name);
+                        array_push($path_stack, $relative_name);
                     }
                 }
             }
