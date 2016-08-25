@@ -39,6 +39,7 @@ class Application {
 
     function fileList($relative_dir, $recursive = false) {
         $files = array();
+        $dirs = array();
         $path_stack = array();
         array_push($path_stack, $relative_dir);
         do {
@@ -50,14 +51,18 @@ class Application {
                     $relative_name = $relative_dir.$filename;
                     $file = $this->getFile($relative_name);
                     $file['name'] = $filename;
-                    $files[] = $file;
                     if ($file['type'] == 'dir' && $recursive) {
                         array_push($path_stack, $relative_name);
+                    }
+                    if ($file['type'] == 'dir') {
+                        $dirs[] = $file;
+                    } else {
+                        $files[] = $file;
                     }
                 }
             }
         } while (count($path_stack) > 0);
-        return $files;
+        return array_merge($dirs, $files);
     }
 
     public function getFile($relative_name) {
