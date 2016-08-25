@@ -42,11 +42,12 @@ class Application {
         $path_stack = array();
         array_push($path_stack, $relative_dir);
         do {
-            $path = array_pop($path_stack);
+            $relative_dir = array_pop($path_stack);
+            $relative_dir = $this->normalizeRelativePath($relative_dir);
             $indir = scandir($this->getFullPath($path));
             foreach ($indir as $filename) {
                 if ($filename[0] != '.') {
-                    $relative_name = $path.$filename;
+                    $relative_name = $relative_dir.$filename;
                     $file = $this->getFile($relative_name);
                     $file['name'] = $filename;
                     $files[$filename] = $file;
