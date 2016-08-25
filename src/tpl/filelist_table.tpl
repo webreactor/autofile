@@ -7,7 +7,7 @@
     {if $file.type == 'dir' }
         <tr class="dir" file_id="{{$file.url}}">
             <td>
-                <p><a href="{$file.url}/{$_filters}">{{$file.relative_name.substr($document_relative_path_len)}}</a></p>
+                <p><a href="{$file.url}/{$_filters}">{include "filename.tpl"}</a></p>
             </td>
             <td></td>
             <td>{$file.type}</td>
@@ -23,7 +23,7 @@
         {set $size = $file.stat.size.\FileWebView\Utilities::formatSize()}
         <tr class="file {cycle "", "odd"}" file_id="{{$file.url}}">
             <td>
-                <p><a href="{$file.url}">{{$file.relative_name.substr($document_relative_path_len)}}</a></p>
+                <p><a href="{$file.url}">{include "filename.tpl"}</a></p>
             </td>
             <td>
                 {if $file.type == 'image' }

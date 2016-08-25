@@ -5,7 +5,7 @@
         {if $file.type == 'dir' }
             <div class="dir"><a href="{$request.document_url}{$file.name.rawurlencode()}/{$_filters}"
                 title="{$file.stat.hmtime}"
-                >{{$file.relative_name.substr($document_relative_path_len)}}</a></div>
+                >{include "filename.tpl"}</a></div>
         {/if}
     {/foreach}
     </div>
@@ -16,7 +16,7 @@
                 <div class="float_container" file_id="{{$file.url}}">
                     {include "preview.tpl"}
                     <div class="subtitile">
-                        <a href="{$file.url}">{{$file.relative_name.substr($document_relative_path_len)}}</a> <small>{$size}</small>
+                        <a href="{$file.url}">{include "filename.tpl"}</a> <small>{$size}</small>
                         <a href="#{$file.url}" class="pointer">#</a>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                         <a href="{$file.url}"
 title="{$file.stat.hmtime}
 {{$file.stat.username}}"
-                        >{{$file.relative_name.substr($document_relative_path_len)}}</a> <small>{$size}</small>
+                        >{include "filename.tpl"}</a> <small>{$size}</small>
                         <a href="#{$file.url}" class="pointer">#</a>
                     </div>
                 </div>
@@ -51,7 +51,7 @@ title="{$file.stat.hmtime}
                         <a href="{$file.url}"
 title="{$file.stat.hmtime}
 {{$file.stat.username}}"
-                        >{{$file.relative_name.substr($document_relative_path_len)}}</a> <small>{$size}</small>
+                        >{include "filename.tpl"}</a> <small>{$size}</small>
                         <a href="#{$file.url}" class="pointer">#</a>
                     </div>
                 </div>

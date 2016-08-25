@@ -9,7 +9,7 @@
         <tr class="dir" file_id="{$file.name.rawurlencode()}">
             <td></td>
             <td>
-                <p><a href="{$file.url}/{$_filters}">{{$file.relative_name.substr($document_relative_path_len)}}</a></p>
+                <p><a href="{$file.url}/{$_filters}">{include "filename.tpl"}</a></p>
             </td>
             <td></td>
             <td>{$file.type}</td>
@@ -27,7 +27,7 @@
             {include "preview.tpl"}
         </td>
         <td>
-            <a href="{$file.url}">{{$file.relative_name.substr($document_relative_path_len)}}</a>
+            <a href="{$file.url}">{include "filename.tpl"}</a>
         </td>
         <td>
             {if $file.type == 'image'}
