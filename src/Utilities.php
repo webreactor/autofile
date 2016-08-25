@@ -40,7 +40,7 @@ class Utilities {
         return str_replace('/../','', $path);;
     }
 
-    static function inputGetStr($_RGET, $name,$def=false,$stop='') {
+    static function inputGetStr($_RGET, $name, $def=false, $stop='') {
         if (isset($_RGET[$name]))$test=trim($_RGET[$name]); else $test='';
 
         if ($test == '') {
@@ -55,7 +55,7 @@ class Utilities {
         return $_RGET[$name];
     }
 
-    static function inputGetNum($_RGET, $name,$def='',$stop='') {
+    static function inputGetNum($_RGET, $name, $def='', $stop='') {
         global $_RGET;
         if (isset($_RGET[$name]))$test=trim($_RGET[$name]); else $test='';
 

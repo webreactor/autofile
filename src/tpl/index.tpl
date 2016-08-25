@@ -15,6 +15,7 @@
             width: {$config.thumbs.width}px;
         {no_parse}}{/no_parse}
     </style>
+{set $document_relative_path_len = $request.document_relative_path.strlen()}
 </head>
 <body>
 <div id="main">
@@ -38,6 +39,7 @@
             {/if}
         </div>
         <div id="filters">
+            <form action="{$request.document_url}{$_filters}" method="get">
             {if $request.sort_direction == 'asc' }
                 {set $oposite_sort = 'desc'}
             {else}
@@ -74,6 +76,11 @@
                 {if $request.view_mode == 'table' }таблицей{else}<a href="{$controller->filters($request,array('view_mode'=>'table'))}">таблицей</a>{/if},
                 {if $request.view_mode == 'mixed' }наглядно{else}<a href="{$controller->filters($request,array('view_mode'=>'mixed'))}">наглядно</a>{/if}.
             </div>
+
+            <div class="filters_block">
+                <input class="search" type="search" name='q' value="{$request.search}" placeholder="Поиск" onsearch="submit()">
+            </div>
+            </form>
         </div>
     </div>
     {include "left_menu.tpl" scope=$blocks->leftMenu($request)}

@@ -10,6 +10,13 @@ class Controller {
         $this->view = $services['view'];
         $this->config = $this->application->config;
         $this->auth = new AuthController($services);
+        $this->args = array(
+            'sort' => array('sort', 'mtime'),
+            'view_mode' => array('view', 'float'),
+            'sort_direction' => array('dir', 'desc'),
+            'search' => array('q', ''),
+            'page' => array('p', 1),
+        );
     }
 
     function handleRequest($raw_request) {
@@ -32,10 +39,9 @@ class Controller {
 
     function parseRequest($raw_request) {
         $request = new \ArrayObject();
-        $request['sort'] =              Utilities::inputGetStr($raw_request['get'], 'sort', 'mtime' );
-        $request['view_mode'] =         Utilities::inputGetStr($raw_request['get'], 'view', 'float' );
-        $request['sort_direction'] =    Utilities::inputGetStr($raw_request['get'], 'dir', 'desc' );
-        $request['rec'] = Utilities::inputGetStr($raw_request['get'], 'rec', 'no' );
+        foreach ($this->args as $key => $value) {
+            $request[$key] = Utilities::inputGetStr($raw_request['get'], $value[0], $value[1]);
+        }
 
         $uri = parse_url($raw_request['uri']);
         $uri['path'] = rawurldecode($uri['path']);
@@ -114,8 +120,22 @@ class Controller {
             $request['template'] = 'filelist_mixed.tpl';    
         }
         
-        $full_list = $this->application->fileList($request['document_relative_path'], $request['rec'] === 'yes');
-        return $this->fileSort($full_list, $request['sort'], $request['sort_direction']);
+        $full_list = $this->application->fileList($request['document_relative_path'], !empty($request['search']));
+        $full_list = $this->filterFiles($full_list, $request['search']);
+        $full_list = $this->sortFiles($full_list, $request['sort'], $request['sort_direction']);
+        return $this->pages($full_list, $request['page'], 50);
+    }
+
+    function pages($files, $page, $per_page) {
+        $page = (int)$page - 1;
+        if ($page < 0) {
+            $page = 0;
+        }
+        return array('files' => array_slice($files, $page * $per_page, $per_page),
+            'total' => count($files),
+            'total_pages' => ceil(count($files) / $per_page),
+            'all_files' => $files,
+        );
     }
 
     function handlePreviewRequest($request) {
@@ -135,7 +155,7 @@ class Controller {
         die();
     }
 
-    function fileSort($files, $by, $direction) {
+    function sortFiles($files, $by, $direction) {
         $alloved = array('name', 'type', 'size', 'mtime', 'username');
         if (!in_array($by, $alloved)) {
             die();
@@ -143,17 +163,17 @@ class Controller {
         return $this->application->sortFiles($files, $by, $direction);
     }
 
+    function filterFiles($files, $filter) {
+        return $this->application->filterFiles($files, $filter);
+    }
+
     function filters($request, $over=array()) {
         $request  = $over + (array)$request;
         $rez = array();
-        if ($request['view_mode'] != 'float') {
-            $rez[]='view='.$request['view_mode'];
-        }
-        if ($request['sort'] != 'mtime') {
-            $rez[]='sort='.$request['sort'];
-        }
-        if ($request['sort_direction'] != 'desc') {
-            $rez[]='dir='.$request['sort_direction'];
+        foreach ($this->args as $key => $value) {
+            if ($request[$key] != $value[1]) {
+                $rez[] = $value[0].'='.$request[$key];
+            }
         }
         if (count($rez) == 0) {
             return '';

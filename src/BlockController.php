@@ -17,7 +17,7 @@ class BlockController {
         array_pop($pieces);
         array_pop($pieces);
         $folders = $this->application->getFolders(implode('/', $pieces));
-        $folders = $this->services['web_controller']->fileSort($folders, $request['sort'], $request['sort_direction']);
+        $folders = $this->services['web_controller']->sortFiles($folders, $request['sort'], $request['sort_direction']);
         return array('data' => $folders);
     }
 

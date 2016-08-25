@@ -15,7 +15,7 @@ class FileFactory {
         return $this->base_dir.$relative_name;
     }
 
-    function getFile($relative_name, $with_meta = true) {
+    function getFile($relative_name) {
         $file = array(
             'relative_name' => $relative_name,
             'fullname'      => $this->getFullPath($relative_name),
@@ -25,7 +25,7 @@ class FileFactory {
             $file['type'] = 'dir';
         } else {
             $file['type'] = $this->getFileType($relative_name);
-            if ($file['type'] != 'file' && $with_meta) {
+            if ($file['type'] != 'file') {
                 $file['meta'] = $this->getFileMeta($relative_name, $file['stat'], $file['type']);    
             }
         }
@@ -36,6 +36,8 @@ class FileFactory {
         $stat = stat($this->getFullPath($relative_name));
         $stat['username'] = $this->getUserName($stat['uid']);
         $stat['groupname'] = $this->getGroupName($stat['gid']);
+        $stat['hmtime'] = Utilities::tsToDateTime($stat['mtime']);
+        $stat['hctime'] = Utilities::tsToDateTime($stat['ctime']);
         return $stat;
     }
 

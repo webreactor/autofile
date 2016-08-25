@@ -177,3 +177,23 @@ span.arrow {
     margin: 50px auto;
     max-width: 800px;
 }
+
+
+.pagination {
+    width:100%;
+    float:left;
+    margin: 15px 30px;
+    font-size: 16px;
+}
+
+.total {
+    width:100%;
+    float:left;
+    margin: 15px 30px;
+    font-size: 15px;
+}
+
+.search {
+    padding: 2px;
+    width: 200px;
+}

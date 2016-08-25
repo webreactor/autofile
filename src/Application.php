@@ -49,9 +49,8 @@ class Application {
                 if ($filename[0] != '.') {
                     $relative_name = $relative_dir.$filename;
                     $file = $this->getFile($relative_name);
-                    // print_r($file);
                     $file['name'] = $filename;
-                    $files[$filename] = $file;
+                    $files[] = $file;
                     if ($file['type'] == 'dir' && $recursive) {
                         array_push($path_stack, $relative_name);
                     }
@@ -61,8 +60,11 @@ class Application {
         return $files;
     }
 
-    public function getFile($relative_name, $with_meta = true) {
-        return $this->file_factory->getFile(rtrim($relative_name, '/'), $with_meta);
+    public function getFile($relative_name) {
+        $file = $this->file_factory->getFile(rtrim($relative_name, '/'));
+        $file['relative_url'] = Utilities::urlEncodePath($file['relative_name']);
+        $file['url'] = $this->config['base_url'].$file['relative_url'];
+        return $file;
     }
 
     function getFullPath($relative_name) {
@@ -79,7 +81,7 @@ class Application {
                 if (is_dir($this->getFullPath($relative_name))) {
                     $folder = $this->getFile($relative_name);
                     $folder['name'] = $filename;
-                    $folders[$filename] = $folder;
+                    $folders[] = $folder;
                 }
             }
         }
@@ -106,6 +108,29 @@ class Application {
         $rez = array();
         foreach ($sort_values as $key => $value) {
             $rez[] = $files[$key];
+        }
+        return $rez;
+    }
+
+    function filterFiles($files, $filter) {
+        if ($filter == '') {
+            return $files;
+        }
+        $rez = array();
+        $filter = preg_quote($filter);
+        $filter = str_replace('\*', '.*', $filter);
+        $filter = str_replace('\?', '.', $filter);
+        $filter = '/'.$filter.'/i';
+        $digital = preg_match('/\d/', $filter);
+        foreach ($files as $file) {
+            $str = $file['relative_name'].' '.$file['stat']['username'];
+            if ($digital) {
+                $str .= ' '.$file['stat']['hmtime'];
+            }
+
+            if (preg_match($filter, $str)) {
+                $rez[] = $file;
+            }
         }
         return $rez;
     }
