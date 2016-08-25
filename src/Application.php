@@ -55,9 +55,9 @@ class Application {
                         array_push($path_stack, $relative_name);
                     }
                     if ($file['type'] == 'dir') {
-                        $dirs[] = $file;
+                        $dirs[$file['relative_name']] = $file;
                     } else {
-                        $files[] = $file;
+                        $files[$file['relative_name']] = $file;
                     }
                 }
             }
@@ -86,7 +86,7 @@ class Application {
                 if (is_dir($this->getFullPath($relative_name))) {
                     $folder = $this->getFile($relative_name);
                     $folder['name'] = $filename;
-                    $folders[] = $folder;
+                    $folders[$folder['relative_name']] = $folder;
                 }
             }
         }
@@ -107,6 +107,7 @@ class Application {
         } else {
             asort($sort_values);
         }
+
         if ($dir != 'asc') {
             $sort_values = array_reverse($sort_values, true);
         }
