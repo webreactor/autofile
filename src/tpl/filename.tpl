@@ -1,1 +1,1 @@
-{{$file.relative_name.substr($document_relative_path_len).wordwrap(60)}}
+{{str_replace('/', " / ", $file.relative_name.substr($document_relative_path_len))}}
