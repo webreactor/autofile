@@ -49,10 +49,10 @@
 
 {foreach from=$data item=$file}
     {if $file.type == 'dir' }
-        <tr class="dir" file_id="{$file.name.rawurlencode()}">
+        <tr class="dir" file_id="{$file.relative_name.rawurlencode()}">
             <td></td>
             <td>
-                <p><a href="{$request.document_url}{$file.name.rawurlencode()}/{$_filters}">{{$file.name}}</a></p>
+                <p><a href="{$config.base_url}{$file.relative_name.\FileWebView\Utilities::urlEncodePath()}/{$_filters}">{{$file.name}}</a></p>
             </td>
             <td></td>
             <td>{$file.type}</td>
@@ -69,22 +69,22 @@
         <td>
             {if $file.type == 'image'}
                 <a href="{$request.document_url}{$file.name.rawurlencode()}">
-                    <img src="{$config.thumbs_url}{$request.document_relative_url}{$file.name.rawurlencode()}.jpg" 
+                    <img src="{$config.thumbs_url}{$config.base_url}{$file.relative_name.\FileWebView\Utilities::urlEncodePath()}.jpg" 
                     title="{$file.meta.width}&#215;{$file.meta.height}{@ "\n"}{$file.stat.ctime.\FileWebView\Utilities::tsToDateTime()}">
                 </a>
             {/if}
             {if $file.type == 'video'}
                 <video controls preload="none">
-                  <source src="{$request.document_url}{$file.name.rawurlencode()}">
+                  <source src="{$config.base_url}{$file.relative_name.\FileWebView\Utilities::urlEncodePath()}">
                 </video>
             {/if}
             {if $file.type == 'audio'}
                 <audio controls preload="none">
-                  <source src="{$request.document_url}{$file.name.rawurlencode()}">
+                  <source src="{$config.base_url}{$file.relative_name.\FileWebView\Utilities::urlEncodePath()}">
                 </audio>
             {/if}
             {if $file.type == 'markdown'}
-                <a href="{$config.thumbs_url}{$request.document_relative_url}{$file.name.rawurlencode()}.html">view</a>
+                <a href="{$config.thumbs_url}{$config.base_url}{$file.relative_name.\FileWebView\Utilities::urlEncodePath()}.html">view</a>
             {/if}
         </td>
         <td>

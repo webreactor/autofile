@@ -44,11 +44,12 @@ class Application {
         do {
             $relative_dir = array_pop($path_stack);
             $relative_dir = $this->normalizeRelativePath($relative_dir);
-            $indir = scandir($this->getFullPath($path));
+            $indir = scandir($this->getFullPath($relative_dir));
             foreach ($indir as $filename) {
                 if ($filename[0] != '.') {
                     $relative_name = $relative_dir.$filename;
                     $file = $this->getFile($relative_name);
+                    // print_r($file);
                     $file['name'] = $filename;
                     $files[$filename] = $file;
                     if ($file['type'] == 'dir' && $recursive) {
