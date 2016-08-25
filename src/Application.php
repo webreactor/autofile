@@ -108,7 +108,7 @@ class Application {
             asort($sort_values);
         }
         if ($dir != 'asc') {
-            $sort_values = array_reverse($sort_values);
+            $sort_values = array_reverse($sort_values, true);
         }
         $rez = array();
         foreach ($sort_values as $key => $value) {
