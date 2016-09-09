@@ -3,7 +3,7 @@
     <div class="float_group">
     {foreach from=$data.files item=$file}
         {if $file.type == 'dir' }
-            <div class="dir"><a href="{$request.document_url}{$file.name.rawurlencode()}/{$_filters}"
+            <div class="dir"><a href="{$file.url}/{$_filters}"
                 title="{$file.stat.hmtime}"
                 >{include "filename.tpl"}</a></div>
         {/if}
